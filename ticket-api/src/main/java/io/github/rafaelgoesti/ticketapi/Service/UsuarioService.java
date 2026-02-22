@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
@@ -15,7 +17,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // POST
+    // Criar Usuários
     public Usuario criarUsuario(String nome, String email, String senha, PerfilUsuario perfilUsuario){
         if (usuarioRepository.existsByEmail(email)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email já cadastrado.");
@@ -38,5 +40,15 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
-}
 
+    // Listar Usuários
+    public List<Usuario> listarUsuarios(){
+        return usuarioRepository.findAll();
+    }
+
+    // Buscar por ID
+    public Usuario buscarPorId(Long id){
+        return usuarioRepository.findById(id).orElseThrow(() -> new
+                ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+    }
+}

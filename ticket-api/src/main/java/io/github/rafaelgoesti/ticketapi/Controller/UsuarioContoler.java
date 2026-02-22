@@ -5,10 +5,9 @@ import io.github.rafaelgoesti.ticketapi.Service.UsuarioService;
 import io.github.rafaelgoesti.ticketapi.dto.CriarUsuarioDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -30,5 +29,17 @@ public class UsuarioContoler {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuario criado com sucesso!");
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Usuario>> listarUsuarios(){
+        List<Usuario> usuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable Long id){
+        Usuario usuario = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuario);
     }
 }
