@@ -2,6 +2,7 @@ package io.github.rafaelgoesti.ticketapi.Controller;
 
 import io.github.rafaelgoesti.ticketapi.Entity.Usuario;
 import io.github.rafaelgoesti.ticketapi.Service.UsuarioService;
+import io.github.rafaelgoesti.ticketapi.dto.AtualizarUsuarioDto;
 import io.github.rafaelgoesti.ticketapi.dto.CriarUsuarioDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,4 +43,16 @@ public class UsuarioContoler {
         Usuario usuario = usuarioService.buscarPorId(id);
         return ResponseEntity.ok(usuario);
     }
+
+    @PutMapping("/{id}")
+    public Usuario atualizarUsuario(@PathVariable Long id, @RequestBody AtualizarUsuarioDto dto){
+        return usuarioService.atualizarUsuario(
+                id,
+                dto.nome(),
+                dto.email(),
+                dto.senha(),
+                dto.perfilUsuario()
+        );
+    }
+
 }
