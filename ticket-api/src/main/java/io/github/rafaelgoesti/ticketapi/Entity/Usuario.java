@@ -1,5 +1,4 @@
 package io.github.rafaelgoesti.ticketapi.Entity;
-
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -29,20 +28,28 @@ public class Usuario {
     @OneToMany(mappedBy = "tecnico")
     private List<Chamado> chamadosTecnico;
 
-    @Column(name = "criado_em")
+    @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
 
     @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-    public Usuario(String nome, String email, String senha, PerfilUsuario perfilUsuario,
-                   List<Chamado> chamadosCriados, List<Chamado> chamadosTecnico) {
+    public Usuario(String nome, String email, String senha, PerfilUsuario perfilUsuario) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.perfilUsuario = perfilUsuario;
-        this.chamadosCriados = chamadosCriados;
-        this.chamadosTecnico = chamadosTecnico;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.criadoEm = LocalDateTime.now();
+        this.atualizadoEm = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.atualizadoEm = LocalDateTime.now();
     }
 
     public Usuario(){

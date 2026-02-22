@@ -21,7 +21,7 @@ public class UsuarioContoler {
 
     @PostMapping
     public ResponseEntity<?> criarUsuario(@RequestBody CriarUsuarioDto dto){
-        Usuario usuario = new Usuario(
+        Usuario usuario = usuarioService.criarUsuario(
                 dto.nome(),
                 dto.email(),
                 dto.senha(),
