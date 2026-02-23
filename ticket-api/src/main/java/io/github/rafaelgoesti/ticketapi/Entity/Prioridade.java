@@ -16,9 +16,8 @@ public class Prioridade {
     @OneToMany(mappedBy = "prioridade")
     private List<Chamado> chamadoPrioridade;
 
-    public Prioridade(String nome, List<Chamado> chamadoPrioridade) {
+    public Prioridade(String nome) {
         this.nome = nome;
-        this.chamadoPrioridade = chamadoPrioridade;
     }
 
     public Prioridade(){
