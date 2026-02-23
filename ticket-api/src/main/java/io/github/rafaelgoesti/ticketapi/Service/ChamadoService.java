@@ -1,7 +1,9 @@
 package io.github.rafaelgoesti.ticketapi.Service;
 import io.github.rafaelgoesti.ticketapi.Entity.*;
 import io.github.rafaelgoesti.ticketapi.Repository.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 
@@ -39,20 +41,25 @@ public class ChamadoService {
     ){
 
         Usuario usuarioReal = usuarioRepository.findById(usuario.getId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
         Usuario tecnicoReal = usuarioRepository.findById(tecnico.getId())
-                .orElseThrow(() -> new RuntimeException("Técnico não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Técnico não encontrado"));
 
         Categoria categoriaReal = categoriaRepository.findById(categoria.getId())
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Categoria não encontrada"));
 
         Statu statusReal = statuRepository.findById(status.getId())
-                .orElseThrow(() -> new RuntimeException("Status não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Status não encontrado"));
 
         Prioridade prioridadeReal = prioridadeRepository.findById(prioridade.getId())
-                .orElseThrow(() -> new RuntimeException("Prioridade não encontrada"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Prioridade não encontrada"));
 
+        System.out.println(tecnicoReal.getPerfilUsuario());
+
+        if (tecnicoReal.getPerfilUsuario() != PerfilUsuario.TECNICO) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Exige perfil TECNICO");
+        }
 
         Chamado chamado = new Chamado(
                 titulo,

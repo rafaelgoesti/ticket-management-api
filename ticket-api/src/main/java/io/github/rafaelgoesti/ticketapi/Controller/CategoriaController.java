@@ -1,7 +1,6 @@
 package io.github.rafaelgoesti.ticketapi.Controller;
 import io.github.rafaelgoesti.ticketapi.Entity.Categoria;
 import io.github.rafaelgoesti.ticketapi.Service.CategoriaService;
-import io.github.rafaelgoesti.ticketapi.Service.UsuarioService;
 import io.github.rafaelgoesti.ticketapi.dto.AtualizarCategoriaDto;
 import io.github.rafaelgoesti.ticketapi.dto.CriarCategoriaDto;
 import org.springframework.http.HttpStatus;
