@@ -39,4 +39,8 @@ public class Statu {
     public void setChamadoStatu(List<Chamado> chamadoStatu) {
         this.chamadoStatu = chamadoStatu;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
