@@ -16,9 +16,8 @@ public class Categoria {
     @OneToMany(mappedBy = "categoria")
     private List<Chamado> chamadoCategoria;
 
-    public Categoria(String nome, List<Chamado> chamadoCategoria) {
+    public Categoria(String nome) {
         this.nome = nome;
-        this.chamadoCategoria = chamadoCategoria;
     }
 
     public Categoria(){
