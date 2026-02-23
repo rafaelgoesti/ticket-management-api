@@ -66,4 +66,12 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
+
+    // Delete
+    public void deletarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+
+        usuarioRepository.delete(usuario);
+    }
 }
