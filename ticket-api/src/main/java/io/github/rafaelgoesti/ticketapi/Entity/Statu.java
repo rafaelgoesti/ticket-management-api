@@ -16,9 +16,8 @@ public class Statu {
     @OneToMany(mappedBy = "status")
     private List<Chamado> chamadoStatu;
 
-    public Statu(String nome, List<Chamado> chamadoStatu) {
+    public Statu(String nome) {
         this.nome = nome;
-        this.chamadoStatu = chamadoStatu;
     }
 
     public Statu(){
